@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: 'AWS::Serverless-2016-10-31'
+Description: |
+  monobank-spendings
+Globals:
+  Function:
+    Timeout: 20
+    Runtime: nodejs12.x
+Resources:
+  WebhookHandler:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      CodeUri: dist
+      Handler: index.webhookHandler
+      Events:
+        Reset:
+          Type: Api
+          Properties:
+            Path: /webhook
+            Method: post
+  DepsLayer:
+    Type: 'AWS::Serverless::LayerVersion'
+    Properties:
+      LayerName: monobank-spendings-serverless-dependencies
+      Description: Dependencies for monobank-spendings-serverless
+      ContentUri: dependencies/
+      CompatibleRuntimes:
+        - nodejs12.x
+      RetentionPolicy: Retain
+Outputs:
+  ApiUrl:
+    Description: API URL
+    Value: !<!Join> 
+      - ''
+      - - 'https://'
+        - !<!Ref> ServerlessRestApi
+        - .execute-api.
+        - !<!Ref> 'AWS::Region'
+        - .amazonaws.com/Prod

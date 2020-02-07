@@ -1,0 +1,49 @@
+{
+  "scripts": {
+    "dev": "concurrently \"npm run dev:*\"",
+    "dev:lambda": "ts-node src/scripts/lambda-local.ts",
+    "dev:tsc": "tsc -w",
+    "deploy": "ts-node src/scripts/deploy.ts",
+    "lint": "eslint \"src/**/*.ts\" --fix -c .eslintrc.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "bash -c 'lint-staged && cd ../web && lint-staged'"
+    }
+  },
+  "lint-staged": {
+    "*.(ts|tsx|js|json)": "eslint --max-warnings=0 --fix -c .eslintrc.js"
+  },
+  "dependencies": {
+    "date-fns": "^2.9.0",
+    "googleapis": "^39.2.0",
+    "source-map-support": "^0.5.16"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.39",
+    "@types/date-fns": "^2.6.0",
+    "@types/lodash": "^4.14.149",
+    "@types/lodash.groupby": "^4.6.6",
+    "@types/nanoid": "^2.1.0",
+    "@types/node": "^12.12.21",
+    "@types/pg": "^7.11.2",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
+    "aws-sdk": "^2.594.0",
+    "concurrently": "^5.0.2",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-immutable": "^1.0.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "husky": "^4.2.0",
+    "jimp": "^0.9.3",
+    "lint-staged": "^10.0.2",
+    "prettier": "^1.19.1",
+    "toml": "^3.0.0",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.3",
+    "yaml-cfn": "^0.2.3"
+  }
+}

@@ -1,0 +1,11 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "monobank-spendings"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-pvw0dkcv030h"
+s3_prefix = "monobank-spendings"
+region = "eu-central-1"
+profile = "monobank"
+capabilities = "CAPABILITY_IAM"
+
